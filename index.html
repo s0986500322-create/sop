@@ -7,29 +7,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #1a1a2e;
-    --ink-mid: #4a4a6a;
-    --ink-soft: #8888aa;
-    --paper: #f7f6f2;
-    --paper-mid: #eeecea;
-    --paper-dark: #e2e0db;
-    --accent: #2563eb;
-    --accent-soft: #dbeafe;
-    --wire: #7c3aed;
-    --wire-soft: #ede9fe;
-    --cash: #059669;
-    --cash-soft: #d1fae5;
-    --warn: #d97706;
-    --warn-soft: #fef3c7;
+    --ink: #1a1a2e; --ink-mid: #4a4a6a; --ink-soft: #8888aa;
+    --paper: #f7f6f2; --paper-mid: #eeecea; --paper-dark: #e2e0db;
+    --accent: #2563eb; --accent-soft: #dbeafe;
+    --wire: #7c3aed; --wire-soft: #ede9fe;
+    --cash: #059669; --cash-soft: #d1fae5;
+    --warn: #d97706; --warn-soft: #fef3c7;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Noto Sans TC', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    font-size: 14px;
-    line-height: 1.7;
-  }
+  body { font-family: 'Noto Sans TC', sans-serif; background: var(--paper); color: var(--ink); font-size: 14px; line-height: 1.7; }
   .page { max-width: 800px; margin: 0 auto; padding: 48px 32px 80px; }
   .doc-header { border-left: 4px solid var(--accent); padding: 0 0 0 24px; margin-bottom: 48px; }
   .doc-eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 6px; font-family: 'DM Mono', monospace; }
@@ -57,7 +43,7 @@
   .field-tag { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 99px; font-weight: 500; vertical-align: middle; margin-left: 4px; }
   .tag-wire { background: #d8b4fe; color: #5b21b6; }
   .req-yes { color: var(--cash); font-weight: 700; font-size: 15px; text-align: center; display: block; }
-  .req-no  { color: var(--paper-dark); font-size: 15px; text-align: center; display: block; }
+  .req-no { color: var(--paper-dark); font-size: 15px; text-align: center; display: block; }
   .note-box { border-left: 3px solid var(--warn); border-radius: 0 8px 8px 0; background: var(--warn-soft); padding: 11px 16px; font-size: 12px; color: var(--ink-mid); margin-top: 12px; line-height: 1.6; }
   .note-box strong { color: var(--warn); }
   .views-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -67,6 +53,7 @@
   .view-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--ink-mid); padding: 5px 0; border-bottom: 1px solid var(--paper-mid); }
   .view-row:last-child { border-bottom: none; }
   .view-badge { font-family: 'DM Mono', monospace; font-size: 10px; padding: 2px 7px; border-radius: 4px; flex-shrink: 0; font-weight: 500; }
+  .view-note { font-size: 11px; color: var(--wire); background: var(--wire-soft); border-radius: 4px; padding: 2px 8px; margin-left: auto; white-space: nowrap; }
   .filter-note { margin-top: 12px; background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 11px 16px; font-size: 12px; color: var(--ink-mid); }
   .filter-note strong { color: var(--accent); }
   .doc-footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--paper-dark); display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-soft); font-family: 'DM Mono', monospace; }
@@ -75,12 +62,13 @@
 </head>
 <body>
 <div class="page">
+
   <header class="doc-header">
     <div class="doc-eyebrow">SOP / 標準作業流程</div>
     <h1 class="doc-title">費用申請系統</h1>
     <div class="doc-meta">
       <span>制定日期：2026/06/06</span>
-      <span>版本：v1.2</span>
+      <span>版本：v1.3</span>
       <span>適用：全部門</span>
     </div>
   </header>
@@ -141,18 +129,45 @@
       <h2 class="section-title">8 個視角說明</h2>
     </div>
     <div class="views-grid">
-      <div class="view-card"><div class="view-card-header" style="background:#4338ca;">JY 部門</div><div class="view-card-body"><div class="view-row"><span class="view-badge" style="background:#ede9fe;color:#4338ca;">視角 1</span>匯款申請</div><div class="view-row"><span class="view-badge" style="background:#ede9fe;color:#4338ca;">視角 2</span>零用金支付</div></div></div>
-      <div class="view-card"><div class="view-card-header" style="background:#047857;">CY 部門</div><div class="view-card-body"><div class="view-row"><span class="view-badge" style="background:#d1fae5;color:#047857;">視角 3</span>匯款申請</div><div class="view-row"><span class="view-badge" style="background:#d1fae5;color:#047857;">視角 4</span>零用金支付</div></div></div>
-      <div class="view-card"><div class="view-card-header" style="background:#b45309;">PY 部門</div><div class="view-card-body"><div class="view-row"><span class="view-badge" style="background:#fef3c7;color:#b45309;">視角 5</span>匯款申請</div><div class="view-row"><span class="view-badge" style="background:#fef3c7;color:#b45309;">視角 6</span>零用金支付</div></div></div>
-      <div class="view-card"><div class="view-card-header" style="background:#9d174d;">HY 部門</div><div class="view-card-body"><div class="view-row"><span class="view-badge" style="background:#fce7f3;color:#9d174d;">視角 7</span>匯款申請</div><div class="view-row"><span class="view-badge" style="background:#fce7f3;color:#9d174d;">視角 8</span>零用金支付</div></div></div>
+      <div class="view-card">
+        <div class="view-card-header" style="background:#4338ca;">JY 部門</div>
+        <div class="view-card-body">
+          <div class="view-row"><span class="view-badge" style="background:#ede9fe;color:#4338ca;">視角 1</span>匯款申請<span class="view-note">需回覆申請人＋回傳匯款截圖</span></div>
+          <div class="view-row"><span class="view-badge" style="background:#ede9fe;color:#4338ca;">視角 2</span>零用金支付</div>
+        </div>
+      </div>
+      <div class="view-card">
+        <div class="view-card-header" style="background:#047857;">CY 部門</div>
+        <div class="view-card-body">
+          <div class="view-row"><span class="view-badge" style="background:#d1fae5;color:#047857;">視角 3</span>匯款申請<span class="view-note">需回覆申請人＋回傳匯款截圖</span></div>
+          <div class="view-row"><span class="view-badge" style="background:#d1fae5;color:#047857;">視角 4</span>零用金支付</div>
+        </div>
+      </div>
+      <div class="view-card">
+        <div class="view-card-header" style="background:#b45309;">PY 部門</div>
+        <div class="view-card-body">
+          <div class="view-row"><span class="view-badge" style="background:#fef3c7;color:#b45309;">視角 5</span>匯款申請<span class="view-note">需回覆申請人＋回傳匯款截圖</span></div>
+          <div class="view-row"><span class="view-badge" style="background:#fef3c7;color:#b45309;">視角 6</span>零用金支付</div>
+        </div>
+      </div>
+      <div class="view-card">
+        <div class="view-card-header" style="background:#9d174d;">HY 部門</div>
+        <div class="view-card-body">
+          <div class="view-row"><span class="view-badge" style="background:#fce7f3;color:#9d174d;">視角 7</span>匯款申請<span class="view-note">需回覆申請人＋回傳匯款截圖</span></div>
+          <div class="view-row"><span class="view-badge" style="background:#fce7f3;color:#9d174d;">視角 8</span>零用金支付</div>
+        </div>
+      </div>
     </div>
-    <div class="filter-note"><strong>篩選條件：</strong>每個視角設定「所屬部門 = 指定部門」且「支付方式 = 對應類型」，兩個條件同時成立。</div>
+    <div class="filter-note">
+      <strong>篩選條件：</strong>每個視角設定「所屬部門 = 指定部門」且「支付方式 = 對應類型」，兩個條件同時成立。
+    </div>
   </section>
 
   <footer class="doc-footer">
-    <span>費用申請系統流程 — v1.2</span>
+    <span>費用申請系統流程 — v1.3</span>
     <span>2026/06/06</span>
   </footer>
+
 </div>
 </body>
 </html>
