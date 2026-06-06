@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>費用申請系統流程</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-mid: #4a4a6a;
+    --ink-soft: #8888aa;
+    --paper: #f7f6f2;
+    --paper-mid: #eeecea;
+    --paper-dark: #e2e0db;
+    --accent: #2563eb;
+    --accent-soft: #dbeafe;
+    --wire: #7c3aed;
+    --wire-soft: #ede9fe;
+    --cash: #059669;
+    --cash-soft: #d1fae5;
+    --warn: #d97706;
+    --warn-soft: #fef3c7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .page { max-width: 800px; margin: 0 auto; padding: 48px 32px 80px; }
+  .doc-header { border-left: 4px solid var(--accent); padding: 0 0 0 24px; margin-bottom: 48px; }
+  .doc-eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 6px; font-family: 'DM Mono', monospace; }
+  .doc-title { font-size: 30px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .doc-meta { margin-top: 12px; font-size: 12px; color: var(--ink-soft); font-family: 'DM Mono', monospace; display: flex; gap: 20px; }
+  .section { margin-bottom: 48px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid var(--paper-dark); }
+  .section-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); background: var(--accent-soft); padding: 3px 8px; border-radius: 4px; font-weight: 500; }
+  .section-title { font-size: 17px; font-weight: 700; color: var(--ink); }
+  .flow-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .flow-step { background: white; border: 1px solid var(--paper-dark); border-radius: 10px; padding: 16px; transition: box-shadow .2s; }
+  .flow-step:hover { box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+  .flow-step-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--accent); font-weight: 500; margin-bottom: 6px; }
+  .flow-step-label { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .flow-step-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
+  .fields-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .fields-table th { text-align: left; padding: 10px 14px; background: var(--ink); color: white; font-weight: 500; font-size: 12px; letter-spacing: .03em; }
+  .fields-table th:first-child { border-radius: 8px 0 0 0; }
+  .fields-table th:last-child { border-radius: 0 8px 0 0; text-align: center; }
+  .fields-table td { padding: 10px 14px; border-bottom: 1px solid var(--paper-mid); color: var(--ink-mid); vertical-align: middle; }
+  .fields-table tr:last-child td { border-bottom: none; }
+  .fields-table tr:nth-child(even) td { background: #fafaf8; }
+  .fields-table tr.wire-row td { background: var(--wire-soft); }
+  .field-name { font-weight: 500; color: var(--ink); }
+  .field-tag { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 99px; font-weight: 500; vertical-align: middle; margin-left: 4px; }
+  .tag-wire { background: #d8b4fe; color: #5b21b6; }
+  .req-yes { color: var(--cash); font-weight: 700; font-size: 15px; text-align: center; display: block; }
+  .req-no  { color: var(--paper-dark); font-size: 15px; text-align: center; display: block; }
+  .note-box { border-left: 3px solid var(--warn); border-radius: 0 8px 8px 0; background: var(--warn-soft); padding: 11px 16px; font-size: 12px; color: var(--ink-mid); margin-top: 12px; line-height: 1.6; }
+  .note-box strong { color: var(--warn); }
+  .views-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .view-card { background: white; border: 1px solid var(--paper-dark); border-radius: 10px; overflow: hidden; }
+  .view-card-header { padding: 10px 16px; font-size: 13px; font-weight: 700; color: white; }
+  .view-card-body { padding: 10px 16px; }
+  .view-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--ink-mid); padding: 5px 0; border-bottom: 1px solid var(--paper-mid); }
+  .view-row:last-child { border-bottom: none; }
+  .view-badge { font-family: 'DM Mono', monospace; font-size: 10px; padding: 2px 7px; border-radius: 4px; flex-shrink: 0; font-weight: 500; }
+  .filter-note { margin-top: 12px; background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 11px 16px; font-size: 12px; color: var(--ink-mid); }
+  .filter-note strong { color: var(--accent); }
+  .doc-footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--paper-dark); display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-soft); font-family: 'DM Mono', monospace; }
+  @media print { body { background: white; } .page { padding: 24px; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="doc-header">
+    <div class="doc-eyebrow">SOP / 標準作業流程</div>
+    <h1 class="doc-title">費用申請系統</h1>
+    <div class="doc-meta">
+      <span>制定日期：2026/06/06</span>
+      <span>版本：v1.2</span>
+      <span>適用：全部門</span>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">申請流程</h2>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step"><div class="flow-step-num">STEP 01</div><div class="flow-step-label">選擇部門</div><div class="flow-step-desc">JY / CY / PY / HY</div></div>
+      <div class="flow-step"><div class="flow-step-num">STEP 02</div><div class="flow-step-label">選擇支付方式</div><div class="flow-step-desc">匯款申請 或 零用金支付</div></div>
+      <div class="flow-step"><div class="flow-step-num">STEP 03</div><div class="flow-step-label">選擇費用類型</div><div class="flow-step-desc">進貨款 或 其他費用</div></div>
+      <div class="flow-step"><div class="flow-step-num">STEP 04</div><div class="flow-step-label">填寫基本資料</div><div class="flow-step-desc">日期、請款人、金額<br>（匯款另填帳號與預計付款日）</div></div>
+      <div class="flow-step"><div class="flow-step-num">STEP 05</div><div class="flow-step-label">上傳收據附件</div><div class="flow-step-desc">圖片或 PDF<br>（二擇一：收據 或 備註說明）</div></div>
+      <div class="flow-step"><div class="flow-step-num">STEP 06</div><div class="flow-step-label">填備註後送出</div><div class="flow-step-desc">補充說明或填入 TMS 單號後提交</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">表單欄位說明</h2>
+    </div>
+    <table class="fields-table">
+      <thead>
+        <tr>
+          <th style="width:160px">欄位名稱</th>
+          <th style="width:130px">欄位類型</th>
+          <th>說明</th>
+          <th style="width:52px">必填</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="field-name">所屬部門</span></td><td>單選</td><td>JY / CY / PY / HY</td><td><span class="req-yes">✓</span></td></tr>
+        <tr><td><span class="field-name">支付方式</span></td><td>單選</td><td>匯款申請 / 零用金支付</td><td><span class="req-yes">✓</span></td></tr>
+        <tr><td><span class="field-name">費用類型</span></td><td>單選</td><td>進貨款 / 其他費用</td><td><span class="req-yes">✓</span></td></tr>
+        <tr><td><span class="field-name">填單日期</span></td><td>日期欄</td><td>預設為今日</td><td><span class="req-yes">✓</span></td></tr>
+        <tr><td><span class="field-name">請款人</span></td><td>人員欄</td><td>預設為填單者</td><td><span class="req-yes">✓</span></td></tr>
+        <tr><td><span class="field-name">金額</span></td><td>數字欄</td><td>NT$ 金額</td><td><span class="req-yes">✓</span></td></tr>
+        <tr class="wire-row"><td><span class="field-name">收款人姓名</span><span class="field-tag tag-wire">匯款專用</span></td><td>文字欄</td><td>選「匯款申請」時才顯示</td><td><span class="req-no">—</span></td></tr>
+        <tr class="wire-row"><td><span class="field-name">銀行 / 代碼</span><span class="field-tag tag-wire">匯款專用</span></td><td>文字欄</td><td>選「匯款申請」時才顯示</td><td><span class="req-no">—</span></td></tr>
+        <tr class="wire-row"><td><span class="field-name">帳號</span><span class="field-tag tag-wire">匯款專用</span></td><td>文字欄</td><td>選「匯款申請」時才顯示</td><td><span class="req-no">—</span></td></tr>
+        <tr class="wire-row"><td><span class="field-name">預計付款日期</span><span class="field-tag tag-wire">匯款專用</span></td><td>日期欄</td><td>選「匯款申請」時才顯示，方便會計排程</td><td><span class="req-no">—</span></td></tr>
+        <tr><td><span class="field-name">收據附件</span></td><td>附件欄</td><td>可上傳圖片或 PDF（與備註二擇一）</td><td><span class="req-no">—</span></td></tr>
+        <tr><td><span class="field-name">備註</span></td><td>文字欄（多行）</td><td>補充說明 或 填入 TMS 單號（與收據二擇一）</td><td><span class="req-no">—</span></td></tr>
+      </tbody>
+    </table>
+    <div class="note-box">
+      <strong>注意 1：</strong>標示「匯款專用」的欄位僅在選擇「匯款申請」時顯示。<br>
+      <strong>注意 2：</strong>收據附件與備註至少填寫其中一項，如有 TMS 單號請填入備註欄。
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">8 個視角說明</h2>
+    </div>
+    <div class="views-grid">
+      <div class="view-card"><div class="view-card-header" style="background:#4338ca;">JY 部門</div><div class="view-card-body"><div class="view-row"><span class="view-badge" style="background:#ede9fe;color:#4338ca;">視角 1</span>匯款申請</div><div class="view-row"><span class="view-badge" style="background:#ede9fe;color:#4338ca;">視角 2</span>零用金支付</div></div></div>
+      <div class="view-card"><div class="view-card-header" style="background:#047857;">CY 部門</div><div class="view-card-body"><div class="view-row"><span class="view-badge" style="background:#d1fae5;color:#047857;">視角 3</span>匯款申請</div><div class="view-row"><span class="view-badge" style="background:#d1fae5;color:#047857;">視角 4</span>零用金支付</div></div></div>
+      <div class="view-card"><div class="view-card-header" style="background:#b45309;">PY 部門</div><div class="view-card-body"><div class="view-row"><span class="view-badge" style="background:#fef3c7;color:#b45309;">視角 5</span>匯款申請</div><div class="view-row"><span class="view-badge" style="background:#fef3c7;color:#b45309;">視角 6</span>零用金支付</div></div></div>
+      <div class="view-card"><div class="view-card-header" style="background:#9d174d;">HY 部門</div><div class="view-card-body"><div class="view-row"><span class="view-badge" style="background:#fce7f3;color:#9d174d;">視角 7</span>匯款申請</div><div class="view-row"><span class="view-badge" style="background:#fce7f3;color:#9d174d;">視角 8</span>零用金支付</div></div></div>
+    </div>
+    <div class="filter-note"><strong>篩選條件：</strong>每個視角設定「所屬部門 = 指定部門」且「支付方式 = 對應類型」，兩個條件同時成立。</div>
+  </section>
+
+  <footer class="doc-footer">
+    <span>費用申請系統流程 — v1.2</span>
+    <span>2026/06/06</span>
+  </footer>
+</div>
+</body>
+</html>
